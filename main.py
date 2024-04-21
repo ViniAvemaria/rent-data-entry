@@ -12,5 +12,5 @@ links = soup.find_links()
 
 driver = Driver()
 driver.open_page(FORM)
-driver.answer_form(addresses, prices, links)
+driver.answer_form((addresses, prices, links))
 driver.quit()

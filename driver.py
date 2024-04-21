@@ -17,17 +17,13 @@ class Driver():
     def new_tab(self):
         self.driver.switch_to.new_window('tab')
 
-    def answer_form(self, addresses, prices, links):
-        for i in range(len(addresses)):
+    def answer_form(self, info):
+        for i in range(len(info[0])):
             inputs = self.driver.find_elements(By.CSS_SELECTOR, "input.whsOnd")
-
             actions = ActionChains(self.driver)
-            actions.send_keys_to_element(inputs[0], addresses[i])
-            actions.send_keys(Keys.TAB)
-            actions.send_keys_to_element(inputs[1], prices[i])
-            actions.send_keys(Keys.TAB)
-            actions.send_keys_to_element(inputs[2], links[i])
-            actions.send_keys(Keys.TAB)
+            for j, input in enumerate(inputs):
+                actions.send_keys_to_element(input, info[j][i])
+                actions.send_keys(Keys.TAB)
             actions.send_keys(Keys.ENTER)
             actions.perform()
 
